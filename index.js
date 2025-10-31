@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.js';
 import taskRoutes from './routes/tasks.js';
 import { pool } from './db.js';
 import { verifyToken, isAdmin, isUser } from './middleware/authMiddleware.js';
+import adminRoutes from './routes/adminRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 // mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('/api/secure', verifyToken, (req, res) => {
   res.json({ message: 'You are authenticated!', user: req.user });
